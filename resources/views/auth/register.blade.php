@@ -20,10 +20,7 @@
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -32,11 +29,19 @@
         <div class="mt-4">
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
+            <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        </div>
+        <!-- Check role -->
+        <div class="form-group row">
+            <label for="role" class="col-md-4 col-form-label text-md-right">Роль</label>
+            <div class="col-md-6">
+                <select id="role" class="form-control" name="role" required>
+                    <option value="user">Пользователь</option>
+                    <option value="admin">Админ</option>
+                </select>
+            </div>
         </div>
 
         <div class="flex items-center justify-end mt-4">
