@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\AdminPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +32,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
-    Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.store');
+    Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
 });
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
