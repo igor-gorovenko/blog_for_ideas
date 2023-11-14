@@ -36,9 +36,9 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
-    Route::get('/posts', [AdminPostController::class, 'index'])->name('admin.posts.index');
-    Route::get('/posts/{id}', [AdminPostController::class, 'show'])->name('admin.posts.show');
     Route::get('/posts/create', [AdminPostController::class, 'create'])->name('admin.posts.create');
+    Route::get('/posts/{id}', [AdminPostController::class, 'show'])->name('admin.posts.show');
+    Route::get('/posts', [AdminPostController::class, 'index'])->name('admin.posts.index');
 });
 
 require __DIR__ . '/auth.php';
