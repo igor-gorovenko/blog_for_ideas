@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
@@ -37,13 +38,12 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/posts', [AdminPostController::class, 'index'])->name('admin.posts.index');
     Route::get('/posts/{id}', [AdminPostController::class, 'show'])->name('admin.posts.show')->where('id', '[0-9]+');
     Route::get('/posts/{create}', [AdminPostController::class, 'create'])->name('admin.posts.create')->where('create', '[A-Za-z]+');
     Route::post('/posts', [AdminPostController::class, 'store'])->name('admin.posts.store');
-});
 
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users.index');
     Route::get('/users/{id}', [AdminUserController::class, 'show'])->name('admin.users.show')->where('id', '[0-9]+');
     Route::put('/users/update/{user}', [AdminUserController::class, 'update'])->name('admin.users.update');
