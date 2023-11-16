@@ -28,9 +28,9 @@ class AdminUserController extends Controller
         try {
             $user->update(['role' => $request->role]);
         } catch (\Exception $e) {
-            return redirect()->route('admin.users.index')->with('error', 'Ошибка при обновлении роли пользователя: ' . $e->getMessage());
+            return redirect()->route('admin.users.show', ['id' => $user->id])->with('error', 'Ошибка при обновлении роли пользователя: ' . $e->getMessage());
         }
 
-        return redirect()->route('admin.users.index')->with('success', 'Роль пользователя успешно обновлена');
+        return redirect()->route('admin.users.show', ['id' => $user->id])->with('success', 'Роль пользователя успешно обновлена');
     }
 }
