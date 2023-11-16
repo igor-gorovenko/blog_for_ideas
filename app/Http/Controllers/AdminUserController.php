@@ -13,6 +13,12 @@ class AdminUserController extends Controller
         return view('admin.users.index', compact('users'));
     }
 
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+        return view('admin.users.show', compact('user'));
+    }
+
     public function update(Request $request, User $user)
     {
         $request->validate([
