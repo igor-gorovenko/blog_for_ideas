@@ -37,15 +37,15 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
-    Route::get('/posts/create', [AdminPostController::class, 'create'])->name('admin.posts.create');
-    Route::get('/posts/{id}', [AdminPostController::class, 'show'])->name('admin.posts.show');
     Route::get('/posts', [AdminPostController::class, 'index'])->name('admin.posts.index');
+    Route::get('/posts/{id}', [AdminPostController::class, 'show'])->name('admin.posts.show')->where('id', '[0-9]+');
+    Route::get('/posts/{create}', [AdminPostController::class, 'create'])->name('admin.posts.create')->where('create', '[A-Za-z]+');
     Route::post('/posts', [AdminPostController::class, 'store'])->name('admin.posts.store');
 });
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
-    Route::put('/users/update/{user}', [AdminUserController::class, 'update'])->name('admin.users.update');
     Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users.index');
+    Route::put('/users/update/{user}', [AdminUserController::class, 'update'])->name('admin.users.update');
 });
 
 require __DIR__ . '/auth.php';
