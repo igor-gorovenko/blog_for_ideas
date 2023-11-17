@@ -10,16 +10,23 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
                     <div class="container">
+                        <h1>USER DETAIL</h1>
                         <h1>{{ $user->name }}</h1>
                         <p>{{ $user->role }}</p>
                         <form action="{{ route('admin.users.update', $user) }}" method="POST">
                             @csrf
                             @method('PUT')
-                            <select name="role">
-                                <option value="user" {{ $user->role === 'user' ? 'selected' : ''}}>User</option>
-                                <option value="admin" {{ $user->role === 'admin' ? 'selected' : ''}}>Admin</option>
-                            </select>
-                            <button type="submit">Update Role</button>
+                            <div>
+                                <label for="name">Name:</label>
+                                <input type="text" id="name" name="name" value="{{ $user->name }}" required>
+                            </div>
+                            <div>
+                                <select name="role">
+                                    <option value="user" {{ $user->role === 'user' ? 'selected' : ''}}>User</option>
+                                    <option value="admin" {{ $user->role === 'admin' ? 'selected' : ''}}>Admin</option>
+                                </select>
+                                <button type="submit">Update Role</button>
+                            </div>
                         </form>
                     </div>
                 </div>
