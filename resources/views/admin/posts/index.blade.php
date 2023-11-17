@@ -11,6 +11,7 @@
                 <div class="p-6">
                     <div class="container">
                         <h1>POSTS</h1>
+                        <a href="{{ route('admin.posts.create') }}">Create new post</a>
                         @foreach($posts as $post)
                         <div>
                             <h3><a href="{{ route('admin.posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a></h3>
