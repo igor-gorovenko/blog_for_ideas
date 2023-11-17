@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\AdminUserController;
+use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +27,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'role:user'])->group(function () {
-    Route::get('/', [PostController::class, 'index'])->name('posts.index');
     Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
     Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show')->where('id', '[0-9]+');
 });
@@ -45,6 +46,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/users/{id}', [AdminUserController::class, 'show'])->name('admin.users.show')->where('id', '[0-9]+');
     Route::put('/users/update/{user}', [AdminUserController::class, 'update'])->name('admin.users.update');
 });
+
 
 require __DIR__ . '/auth.php';
 
