@@ -1,22 +1,28 @@
-<h1>Админка</h1>
-<p>this is CREATE admin</p>
-
-<h1>Create Post</h1>
-
-@if(session('success'))
+<!-- @if(session('success'))
 <div class="alert alert-success">
     {{ session('success') }}
 </div>
-@endif
+@endif -->
 
-<form action="{{ route('admin.posts.store') }}" method="post">
-    @csrf
+<div class="container">
+    <h1>Admin Dashboard</h1>
+    <div>
+        <h4>Create post</h4>
+        <a href="{{ route('admin.posts.index') }}">Back</a>
+        <form action="{{ route('admin.posts.store') }}" method="post">
+            @csrf
+            <div>
+                <label for="title">Title:</label>
+                <input type="text" name="title" id="title" required>
+            </div>
 
-    <label for="title">Title:</label>
-    <input type="text" name="title" id="title" required>
+            <div>
+                <label for="content">Content:</label>
+                <textarea name="content" id="content" required></textarea>
+            </div>
 
-    <label for="content">Content:</label>
-    <textarea name="content" id="content" required></textarea>
 
-    <button type="submit">Create Post</button>
-</form>
+            <button type="submit">Create Post</button>
+        </form>
+    </div>
+</div>

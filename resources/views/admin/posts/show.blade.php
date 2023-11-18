@@ -1,8 +1,10 @@
-<h1>Админка</h1>
-<p>this is SHOW admin</p>
+<div class="container">
+    <h1>Admin Dashboard</h1>
+    <div>
+        <h4>Post detail</h4>
+        <a href="{{ route('admin.posts.index') }}">Back</a>
 
-
-<div>
-    <h2>{{ $post->title }}</h2>
-    <p>{{ $post->content }}</p>
+        <h4>Title: {{ $post->title }}</h4>
+        <p>Content: {{ $post->content }}</p>
+    </div>
 </div>

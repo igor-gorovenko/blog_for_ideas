@@ -1,8 +1,20 @@
-<h1>List posts</h1>
+<div class="container">
+    <h1>All posts</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+            </tr>
+        </thead>
 
-@foreach($posts as $post)
-<div>
-    <h2>{{ $post->title }}</h2>
-    <p>{{ $post->content }}</p>
+        <body>
+            @foreach($posts as $post)
+            <tr>
+                <td>{{ $post->id }}</td>
+                <td><a href="{{ route('posts.show', ['id' => $post->id ]) }}">{{ $post->title }}</a></td>
+            </tr>
+            @endforeach
+        </body>
+    </table>
 </div>
-@endforeach

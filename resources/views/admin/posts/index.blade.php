@@ -1,11 +1,28 @@
-<h1>Админка</h1>
-<p>this is INDEX admin</p>
+<div class="container">
+    <h1>Admin Dashboard</h1>
+    <div>
+        <h4>Posts</h4>
+        <a href="{{ route('admin.index') }}">Back</a>
+        <div>
+            <a href="{{ route('admin.posts.create')}}">Create post</a>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                </tr>
+            </thead>
 
-<h1>List posts</h1>
+            <body>
+                @foreach($posts as $post)
+                <tr>
+                    <td>{{ $post->id }}</td>
+                    <td><a href="{{ route('admin.posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a></td>
+                </tr>
+                @endforeach
+            </body>
 
-@foreach($posts as $post)
-<div>
-    <h2>{{ $post->title }}</h2>
-    <p>{{ $post->content }}</p>
+        </table>
+    </div>
 </div>
-@endforeach
