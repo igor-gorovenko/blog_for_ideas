@@ -23,10 +23,14 @@ class AdminUserController extends Controller
     {
         $request->validate([
             'role' => 'required|in:user,admin',
+            'name' => 'required|string|max:255',
         ]);
 
         try {
-            $user->update(['role' => $request->role]);
+            $user->update([
+                'role' => $request->role,
+                'name' => $request->name,
+            ]);
         } catch (\Exception $e) {
             return redirect()->route('admin.users.show', ['id' => $user->id])->with('error', 'Ошибка при обновлении роли пользователя: ' . $e->getMessage());
         }

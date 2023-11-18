@@ -42,7 +42,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     // Posts
     Route::get('/posts', [AdminPostController::class, 'index'])->name('admin.posts.index');
     Route::get('/posts/{id}', [AdminPostController::class, 'show'])->name('admin.posts.show')->where('id', '[0-9]+');
-    Route::get('/posts/{create}', [AdminPostController::class, 'create'])->name('admin.posts.create')->where('create', '[A-Za-z]+');
+    Route::get('/posts/{create}', [AdminPostController::class, 'create'])->name('admin.posts.create');
     Route::post('/posts', [AdminPostController::class, 'store'])->name('admin.posts.store');
 
     // Users
