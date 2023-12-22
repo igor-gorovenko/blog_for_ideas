@@ -8,18 +8,6 @@ use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\AdminUserController;
 use Illuminate\Support\Facades\Auth;
 
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -31,7 +19,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show')->where('id', '[0-9]+');
 });
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
 
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
 
@@ -40,7 +28,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/posts/{id}', [AdminPostController::class, 'show'])->name('admin.posts.show')->where('id', '[0-9]+');
     Route::get('/posts/create', [AdminPostController::class, 'create'])->name('admin.posts.create');
     Route::post('/posts', [AdminPostController::class, 'store'])->name('admin.posts.store');
-
 
     // Users
     Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users.index');
