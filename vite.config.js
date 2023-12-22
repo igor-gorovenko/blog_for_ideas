@@ -8,7 +8,10 @@ export default defineConfig({
                 'resources/sass/app.scss',
                 'resources/js/app.js',
             ],
-            refresh: true,
         }),
     ],
+    build: {
+        outDir: 'public/dist',
+        emptyOutDir: true,
+    },
 });
