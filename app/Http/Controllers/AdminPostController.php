@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Post;
 
 class AdminPostController extends Controller
@@ -35,12 +36,15 @@ class AdminPostController extends Controller
 
         // Create new post
         $post = new Post([
-            'title' => $request->input('title'),
+            $title = $request->input('title'),
+
+            'title' => $title,
             'content' => $request->input('content'),
+            'slug' => Str::slug($title, '-'),
         ]);
 
         $post->save();
 
-        return redirect()->route('admin.posts.index')->with('success', 'Пост успешно создан!');
+        return redirect()->route('admin.posts.index')->with('success', 'Created new post!');
     }
 }

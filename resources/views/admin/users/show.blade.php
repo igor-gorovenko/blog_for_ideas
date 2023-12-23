@@ -23,7 +23,7 @@
             <tr>
                 <td>Edit data</td>
                 <td>
-                    <form action="{{ route('admin.users.update', $user) }}" method="POST">
+                    <form action="{{ route('admin.users.update', $user->slug) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div>
@@ -38,7 +38,7 @@
                             </select>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-primary">Update Role</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </form>
                 </td>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\User;
 
 class AdminUserController extends Controller
@@ -10,6 +11,7 @@ class AdminUserController extends Controller
     public function index()
     {
         $users = User::all();
+
         return view('admin.users.index', compact('users'));
     }
 
@@ -20,22 +22,25 @@ class AdminUserController extends Controller
         return view('admin.users.show', compact('user'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, $slug)
     {
+        $user = User::where('slug', $slug)->first();
+
         $request->validate([
             'role' => 'required|in:user,admin',
             'name' => 'required|string|max:255',
         ]);
 
-        try {
-            $user->update([
-                'role' => $request->role,
-                'name' => $request->name,
-            ]);
-        } catch (\Exception $e) {
-            return redirect()->route('admin.users.show', ['id' => $user->id])->with('error', 'Ошибка при обновлении роли пользователя: ' . $e->getMessage());
-        }
+        $user->update([
+            $name = $request->input('name'),
 
-        return redirect()->route('admin.users.show', ['id' => $user->id])->with('success', 'Роль пользователя успешно обновлена');
+            'name' => $name,
+            'role' => $request->role,
+            'slug' => Str::slug($name, '-'),
+        ]);
+
+        $user->save();
+
+        return redirect()->route('admin.users.index')->with('success', 'Created new post!');
     }
 }

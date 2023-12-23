@@ -7,6 +7,7 @@
         <div class="mb-2">
             <a href="{{ route('admin.posts.index') }}">Back</a>
         </div>
+
         <div>
             <h3>Create Post</h3>
             <div>
@@ -26,7 +27,6 @@
                         <button type="submit" class="btn btn-primary">Create Post</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
