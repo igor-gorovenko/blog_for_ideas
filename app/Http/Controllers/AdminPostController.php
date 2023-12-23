@@ -14,13 +14,6 @@ class AdminPostController extends Controller
         return view('admin.posts.index', compact('posts'));
     }
 
-    public function show($slug)
-    {
-        $post = Post::where('slug', $slug)->first();
-
-        return view('admin.posts.show', compact('post'));
-    }
-
     public function create()
     {
         return view('admin.posts.create');

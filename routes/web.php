@@ -19,7 +19,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/', [AdminPostController::class, 'index'])->name('index');
         Route::get('/create', [AdminPostController::class, 'create'])->name('create');
         Route::post('/', [AdminPostController::class, 'store'])->name('store');
-        Route::get('/{slug}', [AdminPostController::class, 'show'])->name('show')->where('slug', '[a-zA-Z0-9_-]+');
     });
 
     // Users

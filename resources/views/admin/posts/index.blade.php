@@ -15,19 +15,22 @@
                 <th>ID</th>
                 <th>Title</th>
                 <th>Content</th>
+                <th>Actions</th>
             </thead>
 
             <tbody>
                 @foreach($posts as $post)
                 <tr>
                     <td>{{ $post->id }}</td>
+                    <td>{{ $post->title }}</td>
+                    <td>{{ $post->content }}</td>
                     <td>
-                        <a href="{{ route('admin.posts.show', ['slug' => $post->slug]) }}">
-                            {{ $post->title }}
+                        <a href="{{ route('site.show', ['slug' => $post->slug]) }}" target="_blank">
+                            View
                         </a>
                     </td>
-                    <td>{{ $post->content }}</td>
                 </tr>
+
                 @endforeach
             </tbody>
         </table>
