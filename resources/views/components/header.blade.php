@@ -1,7 +1,7 @@
 <div class="bg-white">
     <div class="container  p-4">
 
-        <a class="navbar-brand" href="{{ route('admin.posts.index') }}">
+        <a class="navbar-brand" href="{{ route('site.index') }}">
             Blog for ideas
         </a>
 
