@@ -1,43 +1,26 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\AdminUserController;
-use Illuminate\Support\Facades\Auth;
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-Route::middleware(['auth', 'role:user'])->group(function () {
-    Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
-    Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show')->where('id', '[0-9]+');
-});
-
-Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
-
-    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
-
-    // Posts
-    Route::get('/posts', [AdminPostController::class, 'index'])->name('admin.posts.index');
-    Route::get('/posts/{id}', [AdminPostController::class, 'show'])->name('admin.posts.show')->where('id', '[0-9]+');
-    Route::get('/posts/create', [AdminPostController::class, 'create'])->name('admin.posts.create');
-    Route::post('/posts', [AdminPostController::class, 'store'])->name('admin.posts.store');
-
-    // Users
-    Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users.index');
-    Route::get('/users/{id}', [AdminUserController::class, 'show'])->name('admin.users.show')->where('id', '[0-9]+');
-    Route::put('/users/update/{user}', [AdminUserController::class, 'update'])->name('admin.users.update');
-});
 
 
-require __DIR__ . '/auth.php';
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show')->where('id', '[0-9]+');
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Добавить middleware admin
+Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+
+// Posts
+Route::get('/posts', [AdminPostController::class, 'index'])->name('admin.posts.index');
+Route::get('/posts/{id}', [AdminPostController::class, 'show'])->name('admin.posts.show')->where('id', '[0-9]+');
+Route::get('/posts/create', [AdminPostController::class, 'create'])->name('admin.posts.create');
+Route::post('/posts', [AdminPostController::class, 'store'])->name('admin.posts.store');
+
+// Users
+Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users.index');
+Route::get('/users/{id}', [AdminUserController::class, 'show'])->name('admin.users.show')->where('id', '[0-9]+');
+Route::put('/users/update/{user}', [AdminUserController::class, 'update'])->name('admin.users.update');

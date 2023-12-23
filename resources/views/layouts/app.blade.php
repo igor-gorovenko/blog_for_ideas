@@ -13,7 +13,7 @@
 
 <body>
     <div id="app">
-        @include('layouts.header')
+        @include('components.header')
 
         <div class="container p-4 bg-light">
             @yield('content')
