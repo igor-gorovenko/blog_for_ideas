@@ -16,7 +16,7 @@ Route::name('site.')->group(function () {
 });
 
 // Добавить middleware admin
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
 
     // Posts
     Route::prefix('posts')->name('posts.')->group(function () {

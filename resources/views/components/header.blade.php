@@ -44,7 +44,7 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        @if(Request::is('admin*'))
+                        @if(auth()->check() && auth()->user()->role === 'admin')
                         <a class="dropdown-item" href="{{ route('admin.posts.index') }}">Go to admin dashboard</a>
                         @endif
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
