@@ -17,13 +17,13 @@
 Замените username на свой
 
 ```
-git clone 
+git clone git@github.com:igor-gorovenko/insider_blog.git
 ```
 
 Переходим в скопированный проект, в корневую папку
 
 ```
-cd name
+cd insider_blog
 ```
 
 #### 2. Install dependencies:
