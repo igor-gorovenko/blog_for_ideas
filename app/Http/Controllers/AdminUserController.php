@@ -13,9 +13,10 @@ class AdminUserController extends Controller
         return view('admin.users.index', compact('users'));
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        $user = User::findOrFail($id);
+        $user = User::where('slug', $slug)->first();
+
         return view('admin.users.show', compact('user'));
     }
 

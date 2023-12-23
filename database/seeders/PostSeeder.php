@@ -19,10 +19,11 @@ class PostSeeder extends Seeder
 
         $faker = FakerFactory::create();
 
-        $title = $faker->sentence;
-        $content = $faker->paragraph;
-
         for ($i = 0; $i < 10; $i++) {
+
+            $title = $faker->sentence;
+            $content = $faker->paragraph;
+
             Post::create([
                 'title' => $title,
                 'content' => $content,

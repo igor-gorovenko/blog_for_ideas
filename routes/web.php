@@ -1,26 +1,31 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\AdminUserController;
 
 
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
-Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show')->where('id', '[0-9]+');
-
+Route::name('site.')->group(function () {
+    Route::get('/', [PostController::class, 'index'])->name('index');
+    Route::get('/{slug}', [PostController::class, 'show'])->name('show')->where('slug', '[a-zA-Z0-9_-]+');
+});
 
 // Добавить middleware admin
-Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+Route::prefix('admin')->name('admin.')->group(function () {
 
-// Posts
-Route::get('/posts', [AdminPostController::class, 'index'])->name('admin.posts.index');
-Route::get('/posts/{id}', [AdminPostController::class, 'show'])->name('admin.posts.show')->where('id', '[0-9]+');
-Route::get('/posts/create', [AdminPostController::class, 'create'])->name('admin.posts.create');
-Route::post('/posts', [AdminPostController::class, 'store'])->name('admin.posts.store');
+    // Posts
+    Route::prefix('posts')->name('posts.')->group(function () {
+        Route::get('/', [AdminPostController::class, 'index'])->name('index');
+        Route::get('/{slug}', [AdminPostController::class, 'show'])->name('show')->where('slug', '[a-zA-Z0-9_-]+');
+        Route::get('/create', [AdminPostController::class, 'create'])->name('create');
+        Route::post('/', [AdminPostController::class, 'store'])->name('store');
+    });
 
-// Users
-Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users.index');
-Route::get('/users/{id}', [AdminUserController::class, 'show'])->name('admin.users.show')->where('id', '[0-9]+');
-Route::put('/users/update/{user}', [AdminUserController::class, 'update'])->name('admin.users.update');
+    // Users
+    Route::prefix('users')->name('users.')->group(function () {
+        Route::get('/', [AdminUserController::class, 'index'])->name('index');
+        Route::get('/{slug}', [AdminUserController::class, 'show'])->name('show')->where('slug', '[a-zA-Z0-9_-]+');
+        Route::put('/update/{user}', [AdminUserController::class, 'update'])->name('update');
+    });
+});

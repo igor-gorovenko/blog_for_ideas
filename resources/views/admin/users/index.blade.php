@@ -1,37 +1,37 @@
-
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
-    <h1>Admin Dashboard</h1>
     <div class="container bg-white p-4">
-        <a href="{{ route('admin.index') }}">Back</a>
-        <h3>Users</h3>
-        @if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
+
+        <div>
+            <h3>Users</h3>
         </div>
-        @endif
-        <table>
+
+        <table class="table table-bordered mt-2">
             <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Role</th>
-                </tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Role</th>
             </thead>
 
-            <body>
+            <tbody>
                 @foreach($users as $user)
                 <tr>
+                    <td>{{ $user->id }}</td>
                     <td>
-                        <a href="{{ route('admin.users.show', ['id' => $user->id]) }}">{{ $user->name }}</a>
+                        <a href="{{ route('admin.users.show', ['slug' => $user->slug]) }}">
+                            {{ $user->name }}
+                        </a>
                     </td>
+
                     <td>{{ $user->role }}</td>
                 </tr>
                 @endforeach
-            </body>
+            </tbody>
         </table>
+
     </div>
 </div>
 @endsection
-
